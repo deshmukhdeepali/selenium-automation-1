@@ -1,5 +1,10 @@
 package flightBookJourney;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +14,16 @@ import org.openqa.selenium.support.ui.Select;
 
 public class JourneyLondonToParis {
 
-	public static void main(String[] args) throws InterruptedException {
-
-		//System.setProperty("webdriver.gecko.driver", "C://Users//Deepa//Downloads//geckodriver-v0.11.1-win64//geckodriver.exe");
-		//WebDriver driver = new FirefoxDriver();
-		System.setProperty("webdriver.chrome.driver", "C://Users//Deepa//eclipse-workspace//chromedriver.exe");
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+		input = new FileInputStream("flightbooking.properties");			
+		prop.load(input);
+		System.out.println(prop.getProperty("CHROME_DRIVER_EXE_PATH"));
+		
+		
+		System.setProperty("webdriver.chrome.driver", prop.getProperty("CHROME_DRIVER_EXE_PATH"));
 		WebDriver driver = new ChromeDriver();
 		driver.get("http://newtours.demoaut.com/");
 		
